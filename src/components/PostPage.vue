@@ -39,16 +39,18 @@
                   </div>
                 </div>
               </div>
-              <div class="post-text">{{content.text}}</div>
-              <div class="post-imgs">
-                <div class="post-img"
-                     v-for="(img,index) in content.imgs"
-                     :key="index">
-                  <img class="post-img-img"
-                       :src="img">
+              <div>
+                <div class="post-text">{{content.text}}</div>
+                <div class="post-imgs">
+                  <div class="post-img"
+                       v-for="(img,index) in content.imgs"
+                       :key="index">
+                    <img class="post-img-img"
+                         :src="img">
+
+                  </div>
 
                 </div>
-
               </div>
               <div class="post-data">
                 <div class="post-data-item">
@@ -209,6 +211,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: auto;
 }
 .post-imgs {
   width: 100%;
@@ -345,7 +348,7 @@ export default {
   object-fit: cover;
 }
 .content {
-  border-radius: 20px;
+  /* border-radius: 20px; */
   background-color: #1e2222;
   display: flex;
   overflow: hidden;

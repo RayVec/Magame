@@ -1,7 +1,7 @@
 <template>
   <div class="main-carousel">
     <div @click="shadeClick()"
-         v-if="postDialogVisible||articleDialogVisible"
+         v-if="postDialogVisible||articleDialogVisible||commentDialogVisible"
          class="shade"></div>
     <div v-if="postDialogVisible"
          class="popup">
@@ -10,6 +10,43 @@
     <div v-if="articleDialogVisible"
          class="popup">
       <article-page></article-page>
+    </div>
+    <div v-if="commentDialogVisible"
+         class="popup">
+      <div class="game-comment-item">
+        <div class="game-comment-head">
+          <div style="display:flex;align-items:center;">
+            <img class="article-headPhoto"
+                 :src="require('@/assets/thirdScreen/80hou.jpg')">
+            <div class="game-comment-author">大平行宇宙</div>
+          </div>
+
+          <div class="game-comment-time">
+            2021-01-22 12:30:11
+          </div>
+        </div>
+        <div class="game-comment-text">
+          <div class="game-comment-text-text">
+            10200通关繁中NS第一次因为一款游戏去买一台掌机.....而事实证明：这，是值得的！丰富的游戏内容，良好的游戏体验，这难道还不够当你回忆起......：
+            - 第一次从初试台地的洞口出来，看到那唯美的世界风景时的震撼！
+            - 第一次因为不小心从塔上掉下来时的心惊！
+            - 第一次从老爷爷手里拿到滑翔帆时的开心！
+            - 第一次看到米法小姐姐剧情时的感动！
+            - 第一次成功打倒第一只神兽时的振奋！
+            - 第一次拿到大师剑时的激动！
+            ........
+            - 以及最后一次打倒加农之后结束游戏时的依依不舍......
+            或许这就是一款好游戏的样子，他也许不会让你顿悟出什么了不起的人生哲理，但他会让你因为它开心，因为他激动，因为他害怕，因为它悲伤，因为他......依依不舍，不是吗！？
+
+            ps:我很少把switch当主机玩过......(˶‾᷄ ⁻̫ ‾᷅˵)
+          </div>
+        </div>
+        <el-rate :value="4.9"
+                 disabled
+                 show-score
+                 text-color="#ff9900"
+                 score-template="{value}"></el-rate>
+      </div>
     </div>
 
     <el-dialog :class="dialogClass"
@@ -159,7 +196,8 @@
               <div v-for="i in 6"
                    :key="i"
                    class="game-comment-crest">
-                <div class="game-comment-item">
+                <div @click="openComment()"
+                     class="game-comment-item">
                   <div class="game-comment-head">
                     <div style="display:flex;align-items:center;">
                       <img class="article-headPhoto"
@@ -234,6 +272,7 @@ export default {
       topicDialogVisible: false,
       postDialogVisible: false,
       newPostDialogVisible: false,
+      commentDialogVisible: false,
       // 配置参数
       swiperOptions: {
         // 分页器
@@ -412,6 +451,7 @@ export default {
     shadeClick () {
       this.postDialogVisible = false
       this.articleDialogVisible = false
+      this.commentDialogVisible = false
       //设置弹窗的尺寸
       let gamePages = document.getElementsByClassName('gamePage')
       // eslint-disable-next-line no-debugger
@@ -424,6 +464,16 @@ export default {
       //设置弹窗的尺寸
 
       this.newPostDialogVisible = true
+    },
+    openComment () {
+      //设置弹窗的尺寸
+      let gamePages = document.getElementsByClassName('gamePage')
+      // eslint-disable-next-line no-debugger
+      // debugger
+      for (let gamePage of gamePages) {
+        gamePage.style.filter = 'blur(10px)'
+      }
+      this.commentDialogVisible = true
     },
     openPost () {
 
@@ -495,6 +545,33 @@ export default {
 </script>
 
 <style scoped>
+.popup >>> .game-comment-item {
+  background-color: unset;
+  justify-content: start;
+  overflow-y: auto;
+}
+.popup >>> .game-comment-head {
+  font-size: 1.8vh;
+}
+.popup >>> .game-comment-author {
+  font-size: 2vh;
+}
+.popup >>> .game-comment-item:hover {
+  animation: unset;
+  cursor: unset;
+}
+.popup >>> .game-comment-text {
+  flex: unset;
+  height: auto;
+  font-size: 1.8vh;
+  line-height: 2.8vh;
+  text-align: start;
+}
+.popup >>> .el-rate {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .popup {
   width: 70%;
   height: 70%;
@@ -522,6 +599,7 @@ export default {
 }
 .game-comment-crest >>> .content:hover {
   animation: expand 1s;
+  cursor: pointer;
 }
 .game-comment-crest >>> .content {
   background-color: #424242;
@@ -567,6 +645,7 @@ export default {
 }
 .game-comment-item:hover {
   animation: expand 1s;
+  cursor: pointer;
 }
 .game-comment-item {
   width: 100%;
@@ -955,7 +1034,9 @@ export default {
   height: 100%;
   box-sizing: border-box;
   display: flex;
-  padding-bottom: 30px;
+  /* padding-bottom: 30px; */
+  padding: 10px 10px 30px 10px;
   position: relative;
+  border-radius: 15px;
 }
 </style>
