@@ -10,8 +10,23 @@
     <div class="gamePage">
       <div class="right-zone">
         <div class="game-comment-title">
-          <el-tag type="success"
-                  style="margin-right:10px">话题</el-tag>塞尔达荒野之息
+          <div style="display:flex;align-items:center">
+            <el-tag type="success"
+                    style="margin-right:10px">话题</el-tag>塞尔达荒野之息
+          </div>
+          <div>
+            <el-dropdown @command="handleCommand">
+              <span class="el-dropdown-link">
+                {{command}}<i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="发布时间">发布时间</el-dropdown-item>
+                <el-dropdown-item command="评论数量">评论数量</el-dropdown-item>
+                <el-dropdown-item command="浏览量">浏览量</el-dropdown-item>
+
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
         </div>
         <div class="game-comment">
           <div class="game-comment-crest"
@@ -38,6 +53,7 @@ export default {
   },
   data () {
     return {
+      command: '排序方式',
       postDialogVisible: false,
 
       // 配置参数
@@ -212,6 +228,9 @@ export default {
     this.setCommentRow()
   },
   methods: {
+    handleCommand (command) {
+      this.command = command
+    },
     openPost () {
 
       let gamePages = document.getElementsByClassName('gamePage')
@@ -277,6 +296,16 @@ export default {
 </script>
 
 <style scoped>
+.el-dropdown {
+  font-size: 1.8vh;
+}
+.el-dropdown-link {
+  cursor: pointer;
+  color: white;
+}
+.el-icon-arrow-down {
+  font-size: 2vh;
+}
 .popup {
   width: 70%;
   height: 70%;
@@ -379,6 +408,9 @@ export default {
   display: flex;
   align-items: center;
   padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  justify-content: space-between;
 }
 .el-carousel {
   width: 100%;
