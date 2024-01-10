@@ -23,3 +23,6 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 # Magame
+
+![Screenshot 1]([url_of_image_1](https://github.com/RayVec/images/blob/main/portfolio/magame/magame.png?raw=true)https://github.com/RayVec/images/blob/main/portfolio/magame/magame.png?raw=true)
+
